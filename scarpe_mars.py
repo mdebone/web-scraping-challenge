@@ -25,9 +25,20 @@ mars_facts = [
     {"Recorded By:": "Egyptian astronomers"}
 ]
 
+
+# set route
 @app.route("/")
-def home():
+def index():
+
+    # store the entire mars info cllection in a list
+    mars = list(db.mars.cind())
+    print(mars)
+
+    # Return the template with the mars info passed in
     return render_template("index.html", mars=mars_facts)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
