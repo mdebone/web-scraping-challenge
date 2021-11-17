@@ -20,6 +20,41 @@
 
 }
 
+.table{
+  border-spacing: 5px 1rem;
+  padding: 0 2em 1em 0;
+  border: 2px solid black;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.td {
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  vertical-align:bottom;
+}
+
+
+.card {
+  display: grid;
+  border-spacing: 5px 1rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.cards bg-light{
+  display: grid;
+  border-spacing: 5px 1rem;
+}
+
+p {
+  font-weight: bold;
+  text-align: initial;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
 :root {
   --bs-blue: #007bff;
