@@ -38,3 +38,7 @@ Ohh Im an idiot, I was looking for diameter, see these readme's do help as a sou
 On to better things, the featured image is really the only thing that I need to format now, the table is stripped and looks good, indexes are bold. 
 So need to either find a better featured image, or work out how to scale to fit since its col-8, and is leaving a lot of whitespace that looks bad, need to either mess with the images margins,
 or just tell the image to fill the space better, Im guessing the former is looked down upon, so Ill just tell it to fill the space better, still need to get the news items from the web-scrapping.
+
+Okay messed with the padding and margin of both the image, and the h3 element, this was after I resized the image. Went in increments of 128, so doubled to 256, it was half its size, doubled again to 512, still space, 1024 was too big, so we back down to 512 and adding in elements of 128, 896 was just a smidge too big.
+Took it down an extra 64 to 832 and the width was perfect. So that was horizontal, needed to account for bottom space. added padding-top and margin to both the h3 element and the image itself and its centered vertically relative to the table so there isn't a gap below it and the mars hemispheres anymore. 
+Changed it to an H1, looks better, the css didn't mess with the jumbotron which was also a h1 which I was worried about. And hey, making the mars hemispher card text bold shifted the p elements from overflow to left aligned, success.
