@@ -1,85 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Barsoom</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barsoom</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <main>
-        <div class="px-4 py-5 border-bottom text-center">
-            <h1 class="display-4 fw-bold" style="
-                padding-right: 0px;
-                padding-left: 500px;
-                ">Mission to Mars</h1>
-                <div class="display-4 fw-bold" style="
-                    padding-right: 0px;
-                    padding-left: 550px;">
-                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Scrape New Data
-                    </button>    
-                </div>             
-            </div>
-        </div>    
-        <div class="container">
-            <div class="row mb-3">
-                <div class"col-xxl-4 themed-grid-col">Latest Mars News</div>
-                <div class"col-xxl-4 themed-grid-col">Link</div>
-                <div class"col-xxl-4 themed-grid-col">link</div>
-            </div>
-        </div>
-        <div class="row align-items-md-stretch">
-           <div class="col-md-6">
-               <div class="h-100 p-5 text-white bg-dark rounded-3">
-                   <h2>Featured Mars Image</h2>
-                   <img src="https://spaceimages-mars.com/image/featured/mars1.jpg" alt="Featured">
-               </div>
-           </div>
-           <div class="col-md-6">
-                <div class="h-100 p-5 text-white bg-dark rounded-3">
-                    <table class="table table-bordered">
-                        {% for x in mars%}
 
-                        {% endfor %}
-                    </table>
-                </div>     
+<div class="jumbotron text-center">
+    <div class="shadow m-2 pb-5">
+        <h1 class="display-2">Mission to Mars</h1>
+        <a href="/scrape" class="btn btn-info" role="button">Scrape New Data</a>
+        <span class="border"></span>
+        <span class="rounded-lg"></span>
+    </div> 
+</div>
+
+
+<div class="card mb-3">
+    <h3 class="card-header">Latest Mars News</h3>
+    <div class="card-body">
+        <h5 class="card-title">Placeholder</h5>
+        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h1 style="
+            margin-top: 8px;
+            padding-top: 24px;">Featured Mars Image</h1>
+            <img src="https://spaceimages-mars.com/image/featured/mars1.jpg" alt="Featured Image" style="width: 832px;padding-top: 16px;border-top-width: 16px;margin-top: 16px;">
+        </div>
+        <div class="col-4">
+            <h5>Mars Facts</h5>
+            <table border="2" class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Mars</th>
+                    <th>Earth</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr="table-active">
+                    <th>Equatorial Diameter:</th>
+                    <td>{{ 6,792 km }}</td>
+                    <td>12,742 km</td>
+                </tr>
+                <tr>
+                    <th>Polar Diameter:</th>
+                    <td>{{ 6,752 km }}</td>
+                    <td>12,713.6 km</td>
+                </tr>
+                <tr>
+                    <th>Mass:</th>
+                    <td>{{ 6.39 × 10^23 kg (0.11 Earths) }}</td>
+                    <td>5.97×10^24 kg (1.0 Earth)</td>
+                </tr>
+                <tr>
+                    <th>Moons:</th>
+                    <td>{{ 2 ( Phobos &amp; Deimos ) }}</td>
+                    <td>1 ( Luna )</td>
+                </tr>
+                <tr>
+                    <th>Orbit Distance:</th>
+                    <td>{{ 227,943,824 km (1.38 AU) }}</td>
+                    <td>149,597,870 km (1.0 AU)</td>
+                </tr>
+                <tr>
+                    <th>Orbit Period:</th>
+                    <td>{{ 687 days (1.9 years) }}</td>
+                    <td>365.256 days (1.0 years)</td>
+                </tr>
+                <tr>
+                    <th>Surface Temperature:</th>
+                    <td>{{ -87 to -5 °C }}</td>
+                    <td>-88 to 58 °C</td>
+                </tr>
+                <tr>
+                    <th>First Record:</th>
+                    <td>{{ 2nd millennium BC }}</td>
+                    <td>uhh</td>
+                </tr>
+                <tr>
+                    <th>Recorded By:</th>
+                    <td>{{ Egyptian astronomers }}</td>
+                    <td>The monkeys in 2001: A Space Odyssey</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>    
+
+<div class="container">
+    <h2>Mars Hemispheres</h2>
+    <div class="card-group" style="padding-top: 16px;">
+        <div class="card bg-light">
+            <img class="card-img-top" src="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg" alt="Cerberus" style="width: 256px;">
+            <div class="card-body"> 
+            <p class="card-text">{{ Cerberus Hemisphere Enhanced }}</p>
             </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <div class="col">
-              <div class="card">
-                <img src="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg" class="card-img-top" alt="Cerberus" style="width: 256px;">
-                <div class="card-body">
-                  <h5 class="card-title">Cerberus Hemisphere Enhanced</h5>
-                </div>
-              </div>
+        <div class="card bg-light">
+            <img class="card-img-top" src="https://marshemispheres.com/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg" alt="Schiaparelli" style="width: 256px;">
+            <div class="card-body">
+            <p class="card-text">{{ Schiaparelli Hemisphere Enhanced }}</p>
             </div>
-            <div class="col">
-              <div class="card">
-                <img src="https://marshemispheres.com/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg" class="card-img-top" alt="Schiaparelli"style="width: 256px;">
-                <div class="card-body">
-                  <h5 class="card-title">Schiaparelli Hemisphere Enhanced</h5>
-                </div>
-              </div>
+        </div>
+        <div class="card bg-light">
+            <img class="card-img-top" src="https://marshemispheres.com/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg" alt="Syrtis Major" style="width: 256px;">
+            <div class="card-body">
+            <p class="card-text">{{ Syrtis Major Hemisphere Enhanced }}</p>
             </div>
-            <div class="col">
-              <div class="card">
-                <img src="https://marshemispheres.com/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg" class="card-img-top" alt="Syrtis Major"style="width: 256px;">
-                <div class="card-body">
-                  <h5 class="card-title">Syrtis Major Hemisphere Enhanced</h5>
-                </div>
-              </div>
+        </div>
+        <div class="card bg-light">
+            <img class="card-img-top" src="https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg" alt="valles_marineris" style="width: 256px;">
+            <div class="card-body">
+            <p class="card-text" >{{ Valles Marineris Hemisphere Enhanced }}</p>
             </div>
-            <div class="col">
-              <div class="card">
-                <img src="https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg" class="card-img-top" alt="valles_marineris"style="width: 256px;">
-                <div class="card-body">
-                  <h5 class="card-title">Valles Marineris Hemisphere Enhanced</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-    </main>
+        </div>
+    </div>
+</div>
+
+    <!-- <div class="jumbotron">
+        <header>
+            <h1 style="text-align:center;">Mission to Mars</h1>     
+        </header>
+    </div>
+
+    <a class="btn btn-primary" href="#" role="button">Scrape New Data</a>
+ -->
+
+
+
+
+
+
+
+
+
+
 </body>
-</html>   
+</html>  
