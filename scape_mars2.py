@@ -2,7 +2,9 @@ from bs4 import BeautifulSoup as bs
 from splinter import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+import os
 import time
+import requests
 
 
 
@@ -178,3 +180,4 @@ def scrape_mars_hemispheres():
 
     # Return mars_data dictionary
     return mars_data
+
