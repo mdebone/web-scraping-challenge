@@ -10,7 +10,7 @@ def init_browser():
         return Browser('chrome', **executable_path, headless=False)
 
 # Create Mars dictionary that is to be imported into Mongo
-mars_data = {}
+mars_info_scrape = {}
 
 # Mars News
 def scrape_mars_news():
@@ -39,14 +39,14 @@ def scrape_mars_news():
     news_blurb = soup.find('div', class_='article_teaser_body').get_text()
 
     # Dictionary entry from Mars News Site
-    mars_data['news_item'] = news_item
-    mars_data['news_date'] = news_date
-    mars_data['news_title'] = news_title
-    mars_data['news_blurb'] = news_blurb
+    mars_info_scrape['news_item'] = news_item
+    mars_info_scrape['news_date'] = news_date
+    mars_info_scrape['news_title'] = news_title
+    mars_info_scrape['news_blurb'] = news_blurb
 
     browser.quit()
 
-    return mars_data
+    return mars_info_scrape
 
 # Get the JPL Mars Image of the Day
 def scrape_mars_image(): 
@@ -74,12 +74,12 @@ def scrape_mars_image():
     full_url = url+featured_image_url
 
     # Dictionary entry from Mars JPL site
-    mars_data['image_title'] = image_title
-    mars_data['full_url'] = full_url
+    mars_info_scrape['image_title'] = image_title
+    mars_info_scrape['full_url'] = full_url
 
     browser.quit()
 
-    return mars_data
+    return mars_info_scrape
 
 # Get Mars Facts 
 def scrape_mars_facts():
@@ -123,12 +123,12 @@ def scrape_mars_facts():
     combo_html_table = combo_df.to_html()
 
     # Dictionary entry for Mars facts
-    mars_data['mars_html_table'] = mars_html_table
-    mars_data['combo_html_table'] = combo_html_table
+    mars_info_scrape['mars_html_table'] = mars_html_table
+    mars_info_scrape['combo_html_table'] = combo_html_table
 
     browser.quit()
 
-    return mars_data
+    return mars_info_scrape
 
 # Mars Hemispheres
 def scrape_mars_hemispheres():
@@ -170,9 +170,9 @@ def scrape_mars_hemispheres():
         # Append the retrieved information into a list of dictionaries
         hemispheres_table.append({"title" : title, "img_url" : img_url})
     
-    mars_data['hemispheres_table'] = hemispheres_table
+    mars_info_scrape['hemispheres_table'] = hemispheres_table
 
     browser.quit()
 
     # Return mars_data dictionary
-    return mars_data
+    return mars_info_scrape
