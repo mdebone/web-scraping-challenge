@@ -4,19 +4,38 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import time
 
-def init_browser():
-        # browser = init_browser()
-        executable_path = {'executable_path': ChromeDriverManager().install()}
-        return Browser('chrome', **executable_path, headless=False)
+def scrape_all():
+    # browser = init_browser()
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=False)
+
+    news_item, news_date, news_title, news_blurb = scrape_mars_news(browser)
+    image_title, full_url = scrape_mars_image(browser)
+    mars_html_table, combo_html_table = scrape_mars_facts()
+    hemispheres_table = scrape_mars_hemispheres(browser)
 
 # Create Mars dictionary that is to be imported into Mongo
-mars_info_scrape = {}
+    mars_info_scrape = {
+        'news_item': news_item,
+        'news_date': news_date,
+        'news_title': news_title,
+        'news_blurb': news_blurb,
+        'image_title': image_title,
+        'full_url': full_url,
+        'combo_html_table': combo_html_table(),
+        'mars_html_table': mars_html_table(),
+        'hemispheres_table': hemispheres_table()
+    }
+
+    # browser.quit()
+    
+    return mars_info_scrape
 
 # Mars News
-def scrape_mars_news():
+def scrape_mars_news(browser):
 
     # initalize browser
-    browser = init_browser()
+    # browser = init_browser()
 
     # go to Mars News site in splinter
     mars_news_url = 'https://redplanetscience.com/'
@@ -38,21 +57,15 @@ def scrape_mars_news():
     news_title = soup.find('div', class_='content_title').get_text()
     news_blurb = soup.find('div', class_='article_teaser_body').get_text()
 
-    # Dictionary entry from Mars News Site
-    mars_info_scrape['news_item'] = news_item
-    mars_info_scrape['news_date'] = news_date
-    mars_info_scrape['news_title'] = news_title
-    mars_info_scrape['news_blurb'] = news_blurb
+    # browser.quit()
 
-    browser.quit()
-
-    return mars_info_scrape
+    return news_item, news_date, news_title, news_blurb
 
 # Get the JPL Mars Image of the Day
-def scrape_mars_image(): 
+def scrape_mars_image(browser): 
 
      # initalize browser
-    browser = init_browser()
+    # browser = init_browser()
 
     # JPL Mars Space Images - Featured Image in splinter
     url = 'https://spaceimages-mars.com/'
@@ -73,23 +86,19 @@ def scrape_mars_image():
     # Get full url
     full_url = url+featured_image_url
 
-    # Dictionary entry from Mars JPL site
-    mars_info_scrape['image_title'] = image_title
-    mars_info_scrape['full_url'] = full_url
+    # browser.quit()
 
-    browser.quit()
-
-    return mars_info_scrape
+    return image_title, full_url
 
 # Get Mars Facts 
 def scrape_mars_facts():
 
      # initalize browser
-    browser = init_browser()
+    # browser = init_browser()
 
     # Visit Mars facts url
     mars_facts_url = "https://galaxyfacts-mars.com/"
-    browser.visit(mars_facts_url)
+    # browser.visit(mars_facts_url)
 
     time.sleep(1)
 
@@ -105,7 +114,7 @@ def scrape_mars_facts():
     mars_df.set_index("Description", inplace=True)
 
     # Save Mars html code to folder Assets
-    mars_html_table = mars_df.to_html()
+    mars_html_table = mars_df.to_html(classes= "table table-striped")
 
     # Now get the combo df
     combo_df = table[0]
@@ -120,59 +129,56 @@ def scrape_mars_facts():
     combo_df = combo_df.drop(['Mars - Earth Comparison'])
 
     # Save Combo html code to folder Assets
-    combo_html_table = combo_df.to_html()
+    combo_html_table = combo_df.to_html(classes= "table table-striped")
 
-    # Dictionary entry for Mars facts
-    mars_info_scrape['mars_html_table'] = mars_html_table
-    mars_info_scrape['combo_html_table'] = combo_html_table
+    # browser.quit()
 
-    browser.quit()
-
-    return mars_info_scrape
+    return mars_html_table, combo_html_table
 
 # Mars Hemispheres
-def scrape_mars_hemispheres():
+def scrape_mars_hemispheres(browser):
 
-     # initalize browser
-    browser = init_browser()
+        # initalize browser
+        # browser = init_browser()
 
-    # Use splinter to visit the Mars Hemispheres website
-    hemisphere_url = "https://marshemispheres.com/"
-    browser.visit(hemisphere_url)
+        # Use splinter to visit the Mars Hemispheres website
+        hemisphere_url = "https://marshemispheres.com/"
+        browser.visit(hemisphere_url)
 
-    # HTML object
-    hemisphere_html = browser.html
+        # HTML object
+        hemisphere_html = browser.html
 
-    # Parse HTML with Beautiful Soup
-    soup = bs(hemisphere_html, 'html.parser')
+        # Parse HTML with Beautiful Soup
+        soup = bs(hemisphere_html, 'html.parser')
 
-    # Scrape all items that contain mars hemispheres information
-    hemispheres = soup.find_all("div", class_="item")
+        # Scrape all items that contain mars hemispheres information
+        hemispheres = soup.find_all("div", class_="item")
 
-    # Create empty list for hemisphere url
-    hemispheres_table = []
+        # Create empty list for hemisphere url
+        hemispheres_table = []
 
-    # Loop thru the Hemispheres
-    for titles in hemispheres:
-        title = titles.find("h3").text
-        hemisphere_img = titles.find("a", class_="itemLink product-item")["href"]
-    
-        # Visit Link
-        browser.visit(hemisphere_url + hemisphere_img)
-    
-        # HTML Object
-        image_html = browser.html
-        soup = bs(image_html, "html.parser")
-    
-        # Create full image url
-        img_url = hemisphere_url + soup.find("img", class_="wide-image")["src"]
-    
-        # Append the retrieved information into a list of dictionaries
-        hemispheres_table.append({"title" : title, "img_url" : img_url})
-    
-    mars_info_scrape['hemispheres_table'] = hemispheres_table
+        # Loop thru the Hemispheres
+        for titles in hemispheres:
+            title = titles.find("h3").text
+            hemisphere_img = titles.find("a", class_="itemLink product-item")["href"]
+        
+            # Visit Link
+            browser.visit(hemisphere_url + hemisphere_img)
+        
+            # HTML Object
+            image_html = browser.html
+            soup = bs(image_html, "html.parser")
+        
+            # Create full image url
+            img_url = hemisphere_url + soup.find("img", class_="wide-image")["src"]
+        
+            # Append the retrieved information into a list of dictionaries
+            hemispheres_table.append({"title" : title, "img_url" : img_url})
 
-    browser.quit()
+        # browser.quit()
 
-    # Return mars_data dictionary
-    return mars_info_scrape
+        # Return mars_data dictionary
+        return hemispheres_table
+
+if __name__ == "__main__":
+    print(scrape_all)
