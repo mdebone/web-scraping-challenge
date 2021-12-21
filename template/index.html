@@ -26,8 +26,9 @@
 <div class="card mb-3">
     <h3 class="card-header">Latest Mars News</h3>
     <div class="card-body">
-        <h5 class="card-title">Placeholder</h5>
-        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+        <h5 class="card-title">{{ news_title }}</h5>
+        <h7 class="card-subtitle text-muted">{{ news_date }}/h6>
+        <h6 class="card-subtitle text-muted">{{ news_blurb }}</h6>
     </div>
 </div>
 
@@ -38,7 +39,10 @@
             <h1 style="
             margin-top: 8px;
             padding-top: 24px;">Featured Mars Image</h1>
-            <img src="https://spaceimages-mars.com/image/featured/mars1.jpg" alt="Featured Image" style="width: 832px;padding-top: 16px;border-top-width: 16px;margin-top: 16px;">
+            <h3 style="
+            margin-top: 8px;
+            padding-top: 24px;">{{image_title}}</h3>
+            <img src="{{mars_info_scrape.full_url}}" alt="Featured Image" style="width: 832px;padding-top: 16px;border-top-width: 16px;margin-top: 16px;">
         </div>
         <div class="col-4">
             <h5>Mars Facts</h5>
@@ -106,27 +110,27 @@
     <h2>Mars Hemispheres</h2>
     <div class="card-group" style="padding-top: 16px;">
         <div class="card bg-light">
-            <img class="card-img-top" src="https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg" alt="Cerberus" style="width: 256px;">
+            <img class="card-img-top" src="{{mars_info_scrape.hemispheres_table.img_url[0]}}" alt="Cerberus" style="width: 256px;">
             <div class="card-body"> 
-            <p class="card-text">{{ Cerberus Hemisphere Enhanced }}</p>
+            <p class="card-text">{{ {{ hemispheres_table.title[0] }} }}</p>
             </div>
         </div>
         <div class="card bg-light">
-            <img class="card-img-top" src="https://marshemispheres.com/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg" alt="Schiaparelli" style="width: 256px;">
+            <img class="card-img-top" src="{{mars_info_scrape.hemispheres_table.img_url[1]}}" alt="Schiaparelli" style="width: 256px;">
             <div class="card-body">
-            <p class="card-text">{{ Schiaparelli Hemisphere Enhanced }}</p>
+            <p class="card-text">{{ hemispheres_table.title[1] }}</p>
             </div>
         </div>
         <div class="card bg-light">
-            <img class="card-img-top" src="https://marshemispheres.com/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg" alt="Syrtis Major" style="width: 256px;">
+            <img class="card-img-top" src="{{mars_info_scrape.hemispheres_table.img_url[2]}}" alt="Syrtis Major" style="width: 256px;">
             <div class="card-body">
-            <p class="card-text">{{ Syrtis Major Hemisphere Enhanced }}</p>
+            <p class="card-text">{{ hemispheres_table.title[2] }}</p>
             </div>
         </div>
         <div class="card bg-light">
-            <img class="card-img-top" src="https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg" alt="valles_marineris" style="width: 256px;">
+            <img class="card-img-top" src="{{mars_info_scrape.hemispheres_table.img_url[3]}}" alt="valles_marineris" style="width: 256px;">
             <div class="card-body">
-            <p class="card-text" >{{ Valles Marineris Hemisphere Enhanced }}</p>
+            <p class="card-text" >{{ hemispheres_table.title[3] }}</p>
             </div>
         </div>
     </div>
